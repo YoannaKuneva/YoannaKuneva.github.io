@@ -14,6 +14,7 @@ function startApp() {
     $('#linkLogin').click(showLoginView);
     $('#linkRegister').click(showRegisterView);
     $('#linkListBooks').click(listBooks);
+    
     $('#linkCreateBook').click(showCreateBookView);
     $('#linkLogout').click(logoutUser);
 
@@ -126,8 +127,10 @@ function startApp() {
     function saveAuthInSession(userInfo) {
         let userAuth = userInfo._kmd.authtoken;
         sessionStorage.setItem('authToken', userAuth);
+
         let userId = userInfo._id;
         sessionStorage.setItem('userId', userId);
+
         let username = userInfo.username;
         $('#loggedInUser').text("Welcome, " + username + "!");
     }
@@ -239,6 +242,8 @@ function startApp() {
         });
 
         function createBookSuccess(response) {
+            saveAuthInSession(response);
+            showHideMenuLinks();
             listBooks();
             showInfo('Book created.');
         }
@@ -280,6 +285,8 @@ function startApp() {
         });
 
         function editBookSuccess(response) {
+            saveAuthInSession(response);
+            showHideMenuLinks();
             listBooks();
             showInfo('Book edited.');
         }
@@ -295,6 +302,8 @@ function startApp() {
         });
         
         function deleteBookSuccess(response) {
+            saveAuthInSession(response);
+            showHideMenuLinks();
             listBooks();
             showInfo('Book deleted.');
         }

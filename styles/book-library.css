@@ -16,6 +16,7 @@
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 5px;
+    font-weight: bold;
 }
 
 #menu a:hover {
